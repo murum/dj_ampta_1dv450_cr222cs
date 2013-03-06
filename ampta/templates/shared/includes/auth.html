@@ -1,0 +1,11 @@
+{% if user.is_authenticated %}
+	<p>Välkommen <strong>{{ user.get_full_name }}!</strong></p>
+	{% include 'shared/includes/menu.html' %}
+	<a href="{% url logout %}"><button>Logga ut</button></a>
+{% else %}
+	{% include 'shared/includes/menu.html' %}
+	<form method="POST" action="{{login}}"> {% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Logga in" />
+	</form>
+{% endif %}

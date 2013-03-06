@@ -1,0 +1,17 @@
+{% extends 'shared/base.html' %}
+{% load custom_filters %}
+
+{% block title %}
+	Ticket - {{ ticket.name }}
+{% endblock %}
+
+{% block right_content %}
+	<h1>{{ ticket.name }}</h1>
+
+	<h2>Ticketbeskrivning</h2>
+	<p>{{ ticket.description }}</p>
+	{% if ticket|ownership:user %}
+		<a href="{% url ticket_edit ticket.project_id ticket.id %}"><button>Editera</button></a>
+		<a id="delete_link" href="{% url ticket_delete ticket.project_id ticket.id %}"><button>Ta bort</button></a>
+	{% endif %}
+{% endblock %}

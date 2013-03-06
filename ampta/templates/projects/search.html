@@ -1,0 +1,22 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}
+	Sök project
+{% endblock %}
+
+{% block right_content %}
+	{% if results|length %}
+		<h2>Projects that was found:</h2>
+		<ul>
+			{% for result in results %}
+				<li><a href="{% url project_link result.id %}">{{ result }}</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<h2 class="error">No projects found</h2>
+	{% endif %}
+	<form method="POST" action="{{search}}"> {% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Sök" />
+	</form>
+{% endblock %}

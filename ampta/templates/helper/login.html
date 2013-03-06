@@ -1,0 +1,15 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}
+	Logga in!
+{% endblock %}
+
+{% block right_content %}
+	{% if message %}
+		<p class="error">{{message}}</p>
+	{% endif %}
+	<div class="startPage">
+		<h1>Projektplanering när den är som bäst</h1>
+		<img src="http://techchai.com/wp-content/uploads/2011/07/ProjectPlanning5-main_Full.jpg" />
+	</div>
+{% endblock %}

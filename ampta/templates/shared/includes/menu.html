@@ -1,0 +1,29 @@
+{% if user.is_authenticated %}
+	<ul class="mainNav">
+		<li><a href='/'>Home</a></li>
+		<li>
+			<a href="{% url project_list %}">Projekt</a>
+			<ul>
+				<li><a href="{% url project_add %}">Skapa projekt</a></li>
+				<li><a href="{% url project_list %}">Alla projekt</a></li>
+				<li><a href="{% url search %}">Sök projekt</a></li>
+			</ul>
+		</li>
+		{% if user.tickets.all|length %}
+			<li>
+				Tickets
+				<ul>
+					{% for ticket in user.tickets.all %}
+					<li>
+						<a href="{% url project_ticket ticket.project_id ticket.id %}">{{ ticket }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</li>
+		{% endif %}
+</ul>
+{% else %}
+	<ul class="mainNav">
+		<li><a href='/'>Home</a></li>
+	</ul>
+{% endif %}

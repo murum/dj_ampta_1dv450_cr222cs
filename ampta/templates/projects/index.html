@@ -1,0 +1,28 @@
+{% extends 'shared/base.html' %}
+{% load custom_filters %}
+
+{% block title %}
+	A Project Manager - Lista alla project
+{% endblock %}
+
+{% block right_content %}
+	{% if project_list %}
+	    <ul>
+	    {% for project in project_list %}
+	    	{% if user in project.users.all %}
+		        <li class="projectName"><a href="{% url project_link project.id %}">{{ project }}</a></li>
+		        <li><p>{{ project.description }}</p></li>
+		        {% if project|ownership:user %}
+		        	<a href="{% url project_edit project.id %}"><button>Editera</button></a>
+		        	<a id="delete_link" href="{% url project_delete project.id %}"><button class="delete_project">Ta bort</button></a>
+	        	{% endif %}
+        	{% else %}
+        		<li class="projectName">{{ project }}</li>
+        	{% endif %}
+        	<hr />
+	    {% endfor %}
+	    </ul>
+	{% else %}
+	    <p>No projects are available.</p>
+	{% endif %}
+{% endblock %}
