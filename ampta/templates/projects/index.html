@@ -9,7 +9,7 @@
 	{% if project_list %}
 	    <ul>
 	    {% for project in project_list %}
-	    	{% if user in project.users.all %}
+	    	{% if user in project.users.all or project|ownership:user %}
 		        <li class="projectName"><a href="{% url project_link project.id %}">{{ project }}</a></li>
 		        <li><p>{{ project.description }}</p></li>
 		        {% if project|ownership:user %}

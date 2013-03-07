@@ -50,7 +50,8 @@ def edit(request, project_id):
 					form.save()
 					return redirect('project_list')
 				except:
-					return HttpResponseServerError()
+					context = {'message': "Something went wrong in the save process."}
+					return render(request, 'helper/permission.html', context)
 		else:
 			form = ProjectForm(instance = project)
 	else:
