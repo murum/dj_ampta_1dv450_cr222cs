@@ -14,8 +14,7 @@ def login_user(request):
 			user = authenticate(username=username_to_try, password=password_to_try)
 			if user is not None:
 				if user.is_active:
-					login(request, user)
-					request.session['has_logged_in'] = True
+					login(request, user)					
 					return redirect('login')
 				else:
 					message = "Your account is not enabled"
